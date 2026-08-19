@@ -13,16 +13,85 @@
     box-sizing:border-box;
 }
 
-body{
-    min-height:100vh;
-    font-family:Arial,sans-serif;
-    color:white;
-    text-align:center;
+html,body{
+    width:100%;
+    min-height:100%;
+    font-family:Arial, sans-serif;
     overflow-x:hidden;
-    background:
-        radial-gradient(circle at top,#40105f,#160027 45%,#050008);
 }
 
+body{
+    background:
+        radial-gradient(circle at top,#5b003b 0%,#21001f 35%,#07000c 100%);
+    color:white;
+    min-height:100vh;
+}
+
+/* Animated background glow */
+body::before{
+    content:"";
+    position:fixed;
+    width:500px;
+    height:500px;
+    border-radius:50%;
+    background:rgba(255,0,128,.15);
+    filter:blur(100px);
+    top:-150px;
+    left:-150px;
+    animation:glow1 7s infinite alternate;
+    z-index:-2;
+}
+
+body::after{
+    content:"";
+    position:fixed;
+    width:500px;
+    height:500px;
+    border-radius:50%;
+    background:rgba(128,0,255,.15);
+    filter:blur(100px);
+    right:-180px;
+    bottom:-150px;
+    animation:glow2 8s infinite alternate;
+    z-index:-2;
+}
+
+@keyframes glow1{
+    from{transform:translate(0,0);}
+    to{transform:translate(180px,120px);}
+}
+
+@keyframes glow2{
+    from{transform:translate(0,0);}
+    to{transform:translate(-150px,-120px);}
+}
+
+/* Floating particles */
+.particle{
+    position:fixed;
+    bottom:-30px;
+    font-size:20px;
+    opacity:.8;
+    animation:floatUp linear infinite;
+    pointer-events:none;
+    z-index:0;
+}
+
+@keyframes floatUp{
+    0%{
+        transform:translateY(0) rotate(0deg);
+        opacity:0;
+    }
+    10%{
+        opacity:1;
+    }
+    100%{
+        transform:translateY(-115vh) rotate(360deg);
+        opacity:0;
+    }
+}
+
+/* Main card */
 .container{
     min-height:100vh;
     display:flex;
@@ -35,123 +104,246 @@ body{
 
 .card{
     width:100%;
-    max-width:700px;
+    max-width:650px;
     padding:45px 25px;
-    border:1px solid rgba(255,255,255,.25);
-    border-radius:30px;
+    text-align:center;
+
     background:rgba(255,255,255,.08);
-    backdrop-filter:blur(15px);
+    border:1px solid rgba(255,255,255,.25);
+    border-radius:35px;
+
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+
     box-shadow:
-        0 0 40px rgba(255,0,180,.25),
-        inset 0 0 30px rgba(255,255,255,.05);
+        0 0 30px rgba(255,0,128,.25),
+        inset 0 0 30px rgba(255,255,255,.04);
+
+    animation:cardAppear 1.2s ease;
+}
+
+@keyframes cardAppear{
+    from{
+        opacity:0;
+        transform:translateY(50px) scale(.9);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
 }
 
 .crown{
-    font-size:55px;
-    animation:float 2s infinite ease-in-out;
+    font-size:45px;
+    margin-bottom:10px;
+    animation:crownFloat 2s ease-in-out infinite alternate;
 }
 
-.small{
+@keyframes crownFloat{
+    from{transform:translateY(0);}
+    to{transform:translateY(-10px);}
+}
+
+.small-title{
+    color:#ffd6ec;
+    font-size:16px;
     letter-spacing:5px;
-    font-size:14px;
-    color:#ffd6f6;
-    margin:15px 0;
+    text-transform:uppercase;
+    margin-bottom:15px;
 }
 
 h1{
-    font-size:clamp(45px,10vw,85px);
-    margin:10px 0;
-    background:linear-gradient(90deg,#ffd700,#ff8ae8,#fff);
+    font-size:clamp(42px,10vw,75px);
+    margin-bottom:10px;
+
+    background:linear-gradient(
+        90deg,
+        #fff,
+        #ffd1e8,
+        #ff70b7,
+        #fff
+    );
+
+    background-size:300%;
     -webkit-background-clip:text;
-    color:transparent;
-    text-shadow:0 0 30px rgba(255,80,220,.35);
+    -webkit-text-fill-color:transparent;
+
+    animation:textShine 4s linear infinite;
+}
+
+@keyframes textShine{
+    0%{background-position:0%;}
+    100%{background-position:300%;}
 }
 
 .subtitle{
-    font-size:20px;
-    line-height:1.7;
-    color:#f5e8ff;
+    font-size:19px;
+    color:#ffd9ec;
+    margin-bottom:30px;
+}
+
+.line{
+    width:80%;
+    height:1px;
     margin:20px auto;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        #ff4fa3,
+        #fff,
+        #ff4fa3,
+        transparent
+    );
 }
 
 .message{
-    margin:30px 0;
-    padding:25px;
-    border-radius:20px;
-    background:rgba(0,0,0,.25);
-    border:1px solid rgba(255,255,255,.15);
+    font-size:18px;
     line-height:1.8;
-    font-size:17px;
+    color:#fff4fa;
+    margin:25px auto;
+    max-width:520px;
 }
 
-button{
-    border:0;
-    padding:16px 30px;
-    margin:10px;
+/* Surprise button */
+.surprise-btn{
+    margin-top:20px;
+    padding:17px 30px;
+
+    border:none;
     border-radius:50px;
-    font-size:16px;
+
+    color:white;
+    font-size:17px;
     font-weight:bold;
+    letter-spacing:1px;
+
     cursor:pointer;
-    color:#25002d;
-    background:linear-gradient(135deg,#ffd700,#ff8ae8);
-    box-shadow:0 0 25px rgba(255,100,220,.45);
+
+    background:linear-gradient(
+        135deg,
+        #ff0080,
+        #ff4d9d,
+        #8e2de2
+    );
+
+    box-shadow:
+        0 0 20px rgba(255,0,128,.5),
+        0 8px 25px rgba(0,0,0,.3);
+
     transition:.3s;
 }
 
-button:hover{
-    transform:scale(1.08);
-    box-shadow:0 0 40px rgba(255,100,220,.7);
+.surprise-btn:hover{
+    transform:translateY(-4px) scale(1.04);
+    box-shadow:
+        0 0 35px rgba(255,0,128,.8),
+        0 10px 30px rgba(0,0,0,.4);
 }
 
+.surprise-btn:active{
+    transform:scale(.95);
+}
+
+/* Surprise section */
 #surprise{
     display:none;
-    margin-top:25px;
-    padding:25px;
-    border-radius:20px;
-    background:rgba(255,255,255,.1);
-    animation:appear .8s ease;
+    margin-top:35px;
+    animation:surpriseShow 1s ease forwards;
 }
 
-.hearts span{
-    position:fixed;
-    bottom:-30px;
-    font-size:22px;
-    animation:heart 8s linear infinite;
-    opacity:.8;
-    z-index:1;
-}
-
-.hearts span:nth-child(1){left:10%;animation-delay:0s}
-.hearts span:nth-child(2){left:25%;animation-delay:2s}
-.hearts span:nth-child(3){left:45%;animation-delay:4s}
-.hearts span:nth-child(4){left:65%;animation-delay:1s}
-.hearts span:nth-child(5){left:85%;animation-delay:3s}
-
-@keyframes heart{
-    0%{
-        transform:translateY(0) scale(.7) rotate(0);
-        opacity:0;
-    }
-    20%{opacity:1}
-    100%{
-        transform:translateY(-110vh) scale(1.5) rotate(360deg);
-        opacity:0;
-    }
-}
-
-@keyframes float{
-    0%,100%{transform:translateY(0)}
-    50%{transform:translateY(-12px)}
-}
-
-@keyframes appear{
+@keyframes surpriseShow{
     from{
         opacity:0;
-        transform:scale(.8);
+        transform:scale(.7);
     }
     to{
         opacity:1;
         transform:scale(1);
+    }
+}
+
+.birthday{
+    font-size:clamp(30px,8vw,50px);
+    margin-bottom:15px;
+
+    background:linear-gradient(
+        90deg,
+        #fff,
+        #ffb3d9,
+        #ff3d9d
+    );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.special-message{
+    font-size:18px;
+    line-height:1.8;
+    color:#ffe7f3;
+}
+
+/* Heart animation */
+.heart{
+    position:fixed;
+    left:50%;
+    top:50%;
+    font-size:28px;
+    pointer-events:none;
+    z-index:20;
+
+    animation:heartFly 2.5s ease-out forwards;
+}
+
+@keyframes heartFly{
+    0%{
+        transform:translate(-50%,-50%) scale(.3) rotate(0deg);
+        opacity:1;
+    }
+
+    100%{
+        transform:
+            translate(
+                calc(-50% + var(--x)),
+                calc(-50% + var(--y))
+            )
+            scale(1.5)
+            rotate(var(--r));
+        opacity:0;
+    }
+}
+
+/* Footer */
+.footer{
+    margin-top:35px;
+    color:#cdaec0;
+    font-size:13px;
+}
+
+/* Mobile */
+@media(max-width:500px){
+
+    .card{
+        padding:35px 18px;
+        border-radius:28px;
+    }
+
+    .small-title{
+        font-size:12px;
+        letter-spacing:3px;
+    }
+
+    .message{
+        font-size:16px;
+    }
+
+    .special-message{
+        font-size:16px;
+    }
+
+    .surprise-btn{
+        width:90%;
+        font-size:15px;
     }
 }
 </style>
@@ -159,105 +351,155 @@ button:hover{
 
 <body>
 
-<div class="hearts">
-    <span>❤️</span>
-    <span>💖</span>
-    <span>💕</span>
-    <span>💗</span>
-    <span>💝</span>
-</div>
+<!-- Background particles -->
+<div class="particle" style="left:5%;animation-duration:8s;">💖</div>
+<div class="particle" style="left:15%;animation-duration:11s;animation-delay:2s;">✨</div>
+<div class="particle" style="left:25%;animation-duration:9s;animation-delay:1s;">💕</div>
+<div class="particle" style="left:38%;animation-duration:12s;animation-delay:4s;">⭐</div>
+<div class="particle" style="left:50%;animation-duration:8s;animation-delay:2s;">💗</div>
+<div class="particle" style="left:62%;animation-duration:10s;animation-delay:3s;">✨</div>
+<div class="particle" style="left:75%;animation-duration:13s;animation-delay:1s;">💖</div>
+<div class="particle" style="left:88%;animation-duration:9s;animation-delay:4s;">💕</div>
 
 <div class="container">
 
-<div class="card">
+    <div class="card">
 
-    <div class="crown">👑</div>
+        <div class="crown">👑</div>
 
-    <div class="small">A SPECIAL DAY • A SPECIAL PERSON</div>
+        <div class="small-title">
+            A Special Day For A Special Person
+        </div>
 
-    <h1>Happy Birthday</h1>
+        <h1>Akanksha</h1>
 
-    <h2 style="font-size:38px;color:#ffd6f6;">
-        Akanksha ❤️
-    </h2>
+        <div class="subtitle">
+            ✨ Someone Truly Special ✨
+        </div>
 
-    <p class="subtitle">
-        ✨ Wishing you a beautiful birthday filled with
-        happiness, love, smiles and unforgettable moments. ✨
-    </p>
+        <div class="line"></div>
 
-    <div class="message">
-        🎂 <b>Today is your special day!</b><br><br>
+        <div class="message">
+            Today is not just another day... 💖
+            <br>
+            It's a beautiful reminder that someone
+            very special came into this world.
+        </div>
 
-        May every dream of yours come true,
-        may your smile always stay bright,
-        and may your life always be filled
-        with happiness and beautiful memories. 💖
+        <button class="surprise-btn" onclick="openSurprise()">
+            🎁 CLICK TO OPEN SURPRISE 🎁
+        </button>
+
+        <div id="surprise">
+
+            <div class="birthday">
+                🎂 Happy Birthday Akanksha! 🎂
+            </div>
+
+            <div class="special-message">
+                💖 May your smile always stay this beautiful.
+                <br><br>
+                ✨ May every dream of yours come true.
+                <br><br>
+                🌸 May your life always be filled with
+                happiness, love and beautiful moments.
+                <br><br>
+                👑 You deserve all the happiness in the world!
+                <br><br>
+                <strong>Once Again... Happy Birthday! ❤️</strong>
+            </div>
+
+        </div>
+
+        <div class="footer">
+            Made with ❤️ specially for Akanksha
+        </div>
+
     </div>
-
-    <button onclick="showSurprise()">
-        🎁 OPEN BIRTHDAY SURPRISE
-    </button>
-
-    <div id="surprise">
-        <div style="font-size:45px;">🎉🎂💖🎁✨</div>
-
-        <h2 style="margin:15px 0;color:#ffd700;">
-            Surprise! ❤️
-        </h2>
-
-        <p style="font-size:18px;line-height:1.7;">
-            Akanksha, may this birthday bring
-            something wonderful into your life. 🌸
-            <br><br>
-            Keep smiling, keep shining and
-            always stay happy! 💕
-        </p>
-    </div>
-
-    <p style="margin-top:35px;color:#dcb9e8;">
-        Made with ❤️ specially for Akanksha
-    </p>
-
-</div>
 
 </div>
 
 <script>
-function showSurprise(){
+
+function openSurprise(){
 
     const surprise = document.getElementById("surprise");
 
     surprise.style.display = "block";
 
-    // Celebration effect
-    for(let i=0;i<25;i++){
+    /* Button text change */
+    const button = document.querySelector(".surprise-btn");
+    button.innerHTML = "💖 SURPRISE OPENED 💖";
+
+    button.style.pointerEvents = "none";
+
+    /* Create many hearts from center */
+    for(let i=0;i<45;i++){
 
         const heart = document.createElement("div");
 
-        heart.innerHTML = ["❤️","💖","💝","✨","🎉"][Math.floor(Math.random()*5)];
+        const hearts = ["❤️","💖","💕","💗","💓","✨"];
 
-        heart.style.position = "fixed";
-        heart.style.left = Math.random()*100 + "vw";
-        heart.style.top = "50vh";
-        heart.style.fontSize = "25px";
-        heart.style.zIndex = "9999";
-        heart.style.transition = "all 2s ease-out";
+        heart.className = "heart";
+
+        heart.innerHTML =
+            hearts[Math.floor(Math.random()*hearts.length)];
+
+        const angle = Math.random()*Math.PI*2;
+        const distance = 180 + Math.random()*450;
+
+        const x = Math.cos(angle)*distance;
+        const y = Math.sin(angle)*distance;
+
+        const rotation = Math.random()*360-180;
+
+        heart.style.setProperty("--x",x+"px");
+        heart.style.setProperty("--y",y+"px");
+        heart.style.setProperty("--r",rotation+"deg");
+
+        heart.style.animationDuration =
+            (1.8 + Math.random()*1.5)+"s";
 
         document.body.appendChild(heart);
 
         setTimeout(()=>{
-            heart.style.transform =
-                "translateY(-300px) translateX("+
-                ((Math.random()*300)-150)+"px) rotate(360deg)";
-            heart.style.opacity = "0";
-        },50);
+            heart.remove();
+        },3500);
+    }
+
+    /* Extra floating hearts */
+    for(let i=0;i<15;i++){
 
         setTimeout(()=>{
-            heart.remove();
-        },2200);
+
+            const heart = document.createElement("div");
+
+            heart.className="heart";
+            heart.innerHTML="💖";
+
+            heart.style.left=Math.random()*100+"%";
+            heart.style.top="100%";
+
+            heart.style.setProperty(
+                "--x",
+                (Math.random()*200-100)+"px"
+            );
+
+            heart.style.setProperty(
+                "--y",
+                -(500+Math.random()*400)+"px"
+            );
+
+            document.body.appendChild(heart);
+
+            setTimeout(()=>{
+                heart.remove();
+            },3000);
+
+        },i*100);
     }
 }
+
 </script>
 
 </body>
