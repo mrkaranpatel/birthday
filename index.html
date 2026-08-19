@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Happy Birthday Akanksha ❤️</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    min-height:100vh;
+    font-family:Arial,sans-serif;
+    color:white;
+    text-align:center;
+    overflow-x:hidden;
+    background:
+        radial-gradient(circle at top,#40105f,#160027 45%,#050008);
+}
+
+.container{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:30px 15px;
+    position:relative;
+    z-index:2;
+}
+
+.card{
+    width:100%;
+    max-width:700px;
+    padding:45px 25px;
+    border:1px solid rgba(255,255,255,.25);
+    border-radius:30px;
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(15px);
+    box-shadow:
+        0 0 40px rgba(255,0,180,.25),
+        inset 0 0 30px rgba(255,255,255,.05);
+}
+
+.crown{
+    font-size:55px;
+    animation:float 2s infinite ease-in-out;
+}
+
+.small{
+    letter-spacing:5px;
+    font-size:14px;
+    color:#ffd6f6;
+    margin:15px 0;
+}
+
+h1{
+    font-size:clamp(45px,10vw,85px);
+    margin:10px 0;
+    background:linear-gradient(90deg,#ffd700,#ff8ae8,#fff);
+    -webkit-background-clip:text;
+    color:transparent;
+    text-shadow:0 0 30px rgba(255,80,220,.35);
+}
+
+.subtitle{
+    font-size:20px;
+    line-height:1.7;
+    color:#f5e8ff;
+    margin:20px auto;
+}
+
+.message{
+    margin:30px 0;
+    padding:25px;
+    border-radius:20px;
+    background:rgba(0,0,0,.25);
+    border:1px solid rgba(255,255,255,.15);
+    line-height:1.8;
+    font-size:17px;
+}
+
+button{
+    border:0;
+    padding:16px 30px;
+    margin:10px;
+    border-radius:50px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    color:#25002d;
+    background:linear-gradient(135deg,#ffd700,#ff8ae8);
+    box-shadow:0 0 25px rgba(255,100,220,.45);
+    transition:.3s;
+}
+
+button:hover{
+    transform:scale(1.08);
+    box-shadow:0 0 40px rgba(255,100,220,.7);
+}
+
+#surprise{
+    display:none;
+    margin-top:25px;
+    padding:25px;
+    border-radius:20px;
+    background:rgba(255,255,255,.1);
+    animation:appear .8s ease;
+}
+
+.hearts span{
+    position:fixed;
+    bottom:-30px;
+    font-size:22px;
+    animation:heart 8s linear infinite;
+    opacity:.8;
+    z-index:1;
+}
+
+.hearts span:nth-child(1){left:10%;animation-delay:0s}
+.hearts span:nth-child(2){left:25%;animation-delay:2s}
+.hearts span:nth-child(3){left:45%;animation-delay:4s}
+.hearts span:nth-child(4){left:65%;animation-delay:1s}
+.hearts span:nth-child(5){left:85%;animation-delay:3s}
+
+@keyframes heart{
+    0%{
+        transform:translateY(0) scale(.7) rotate(0);
+        opacity:0;
+    }
+    20%{opacity:1}
+    100%{
+        transform:translateY(-110vh) scale(1.5) rotate(360deg);
+        opacity:0;
+    }
+}
+
+@keyframes float{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-12px)}
+}
+
+@keyframes appear{
+    from{
+        opacity:0;
+        transform:scale(.8);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="hearts">
+    <span>❤️</span>
+    <span>💖</span>
+    <span>💕</span>
+    <span>💗</span>
+    <span>💝</span>
+</div>
+
+<div class="container">
+
+<div class="card">
+
+    <div class="crown">👑</div>
+
+    <div class="small">A SPECIAL DAY • A SPECIAL PERSON</div>
+
+    <h1>Happy Birthday</h1>
+
+    <h2 style="font-size:38px;color:#ffd6f6;">
+        Akanksha ❤️
+    </h2>
+
+    <p class="subtitle">
+        ✨ Wishing you a beautiful birthday filled with
+        happiness, love, smiles and unforgettable moments. ✨
+    </p>
+
+    <div class="message">
+        🎂 <b>Today is your special day!</b><br><br>
+
+        May every dream of yours come true,
+        may your smile always stay bright,
+        and may your life always be filled
+        with happiness and beautiful memories. 💖
+    </div>
+
+    <button onclick="showSurprise()">
+        🎁 OPEN BIRTHDAY SURPRISE
+    </button>
+
+    <div id="surprise">
+        <div style="font-size:45px;">🎉🎂💖🎁✨</div>
+
+        <h2 style="margin:15px 0;color:#ffd700;">
+            Surprise! ❤️
+        </h2>
+
+        <p style="font-size:18px;line-height:1.7;">
+            Akanksha, may this birthday bring
+            something wonderful into your life. 🌸
+            <br><br>
+            Keep smiling, keep shining and
+            always stay happy! 💕
+        </p>
+    </div>
+
+    <p style="margin-top:35px;color:#dcb9e8;">
+        Made with ❤️ specially for Akanksha
+    </p>
+
+</div>
+
+</div>
+
+<script>
+function showSurprise(){
+
+    const surprise = document.getElementById("surprise");
+
+    surprise.style.display = "block";
+
+    // Celebration effect
+    for(let i=0;i<25;i++){
+
+        const heart = document.createElement("div");
+
+        heart.innerHTML = ["❤️","💖","💝","✨","🎉"][Math.floor(Math.random()*5)];
+
+        heart.style.position = "fixed";
+        heart.style.left = Math.random()*100 + "vw";
+        heart.style.top = "50vh";
+        heart.style.fontSize = "25px";
+        heart.style.zIndex = "9999";
+        heart.style.transition = "all 2s ease-out";
+
+        document.body.appendChild(heart);
+
+        setTimeout(()=>{
+            heart.style.transform =
+                "translateY(-300px) translateX("+
+                ((Math.random()*300)-150)+"px) rotate(360deg)";
+            heart.style.opacity = "0";
+        },50);
+
+        setTimeout(()=>{
+            heart.remove();
+        },2200);
+    }
+}
+</script>
+
+</body>
+</html>
